@@ -1,0 +1,64 @@
+
+
+body{
+	background-color:grey;
+}
+
+.main{
+	position:absolute;
+	
+	font-family:arial;
+	font-size:125%;
+	background-color:white;
+		
+	padding:2%;
+}
+@media screen and (orientation: landscape){
+	.main{
+		
+		left:25%;
+		width:46%;
+	}
+}
+@media screen and (orientation: portrait){
+	.main{
+		left:10%;
+		width:76%;
+	}
+}
+
+h1{
+	text-align:center;
+	font-size:240%;
+}
+
+img{
+	width:99%;
+	border-style:solid;
+	border-color:black;
+	border-width:1%;
+}
+
+input[type="text"]{
+	width:100%;
+}
+
+input[type="text"].numbered{
+	width:100%;
+}
+
+select{
+	font-size:100%
+}
+
+input[type="submit"]{
+	font-size:150%;
+}
+
+.redText{
+	color:red;
+}
+
+footer{
+	text-align:center;
+}
