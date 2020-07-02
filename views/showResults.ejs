@@ -5,23 +5,70 @@
 
 <body>
     <h1>Survey analysis</h1>
-    <h2>Colors</h2>
+
+    <h2>Question 1</h2>
+    <p>What is your general impression of the website?</p>
+    <p>Count: <%= results[0][0].count %></p>
     <ul>
-    <% for (var i=0; i<results[0].length; i++){ %>
-        <li><%= results[0][i].color %> :  <%= results[0][i].count %></li>
+    <% for (var i=0; i<results[0][0].answers.length; i++){ %>
+        <li><%= results[0][0].answers[i] %></li>
     <% } %>    
     </ul>
-    <h2>Fruits</h2>
+
+    <h2>Question 2</h2>
+    <p>Were you able to find the contact information?</p>
     <ul>
     <% for (var i=0; i<results[1].length; i++){ %>
-        <li><%= results[1][i].fruit %> :  <%= results[1][i].count %></li>
+        <li><%= results[1][i].answer %> :  <%= results[1][i].count %></li>
     <% } %>    
     </ul>
-    <h2>Animals</h2>
+
+    <h2>Question 3</h2>
+    <p>Do you agree with the following statement: this website is easy to understand?</p>
     <ul>
     <% for (var i=0; i<results[2].length; i++){ %>
-        <li><%= results[2][i].animal %> :  <%= results[2][i].count %></li>
+        <li><%= results[2][i].answer %> :  <%= results[2][i].count %></li>
     <% } %>    
     </ul>
+
+    <h2>Question 4</h2>
+    <p>What is your age category?</p>
+    <ul>
+    <% for (var i=0; i<results[3].length; i++){ %>
+        <li><%= results[3][i].answer %> :  <%= results[3][i].count %></li>
+    <% } %>    
+    </ul>
+
+    <h2>Question 5</h2>
+    <p>Please check every statement that applies to your use of this website</p>
+    <p> 1.  This website lacked some functionalities I expected<br>
+        2.  I was confused by some elements of the website(buttons, menus, icons, etc.)<br>
+        3.  I was required to complete necessary steps while performing actions on this website<br>
+        4.  I had difficulty using this website<br>
+        5.  I encountered errors or bugs while using this website</p>
+    <ul>
+    <% for (var i=0; i<results[4].length; i++){ %>
+        <li>
+            <%= results[4][i].answer %> :  <%= results[4][i].count %>
+        </li>
+    <% } %>    
+    </ul>
+
+    <h2>Question 6</h2>
+    <p>Reasons (count: <%= results[5][0].count %>):</p>
+        <ul>
+            <% for (var i=0; i<results[5][0].answers.length; i++){ %>
+                <li> <%= results[5][0].answers[i] %> </li>
+            <% } %>
+        </ul>
+
+    <h2>Comments</h2>
+    <p>Count: <%= results[6][0].count %></p>
+    <ul>
+        <% for (var i=0; i<results[6][0].answers.length; i++){ %>
+            <li> <%= results[6][0].answers[i] %> </li>
+        <% } %>
+    </ul>
+
 </body>
 </html>

@@ -25,14 +25,23 @@ function combineCounts(name, value){
      // will be useful for text entry, since the item typed in might not be in the list
     var found = 0;
     for (var i=0; i<info.length; i++){
-        if (info[i][name] === value){
+        if (info[i].answer === value){
             info[i].count = parseInt(info[i].count) + 1;
             found = 1;
         }
     }
     if (found === 0){
-        info.push({[name] : value, count: 1});
+        info.push({"answer" : value, count: 1});
     }
+    console.log(info);
+    writeData(info, name);
+}
+
+function addElement(name, value){
+    info = readData(name);
+    info[0].answers.push(value);
+    info[0].count++;
+    console.log(info);
     writeData(info, name);
 }
 
@@ -42,11 +51,15 @@ module.exports = function(app){
     // when a user goes to localhost:3000/analysis
     // serve a template (ejs file) which will include the data from the data files
     app.get('/analysis', function(req, res){
-        var color = readData("color");
-        var fruit = readData("fruit");
-        var animal = readData("animal");
-        res.render('showResults', {results: [color, fruit, animal]});
-        console.log([color, fruit, animal]);
+        var question1 = readData("question1");
+        var question2 = readData("question2");
+        var question3 = readData("question3");
+        var question4 = readData("question4");
+        var question5 = readData("question5");
+        var question6 = readData("question6");
+        var comments = readData("comments");
+        res.render('showResults', {results: [question1, question2, question3, question4, question5, question6, comments]});
+        console.log([question1, question2, question3, question4, question5, question6, comments]);
     });
 
     // when a user goes to localhost:3000/bitesiteSurvey
@@ -63,10 +76,10 @@ module.exports = function(app){
         var json = req.body;
         for (var key in json){
             console.log(key + ": " + json[key]);
-            // in the case of checkboxes, the user might check more than one
-            if ((key === "color") && (json[key].length === 2)){
-                for (var item in json[key]){
-                    combineCounts(key, json[key][item]);
+            
+            if (key === "question1" || key === "question6" || key === "comments"){
+                if(json[key] !== ''){
+                    addElement(key, json[key]);
                 }
             }
             else {
@@ -75,7 +88,7 @@ module.exports = function(app){
         }
         // mystery line... (if I take it out, the SUBMIT button does change)
         // if anyone can figure this out, let me know!
-        res.sendFile(__dirname + "/views/niceSurvey.html");
+        res.sendFile(__dirname + "/views/bitesiteSurvey.html");
     });
     
 
